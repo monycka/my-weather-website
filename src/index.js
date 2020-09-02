@@ -80,13 +80,6 @@ timeElement.innerHTML = time(currentTime);
 
 //Search City
 function currentWeather(response) {
-  let searchInput = document.querySelector("#searching");
-  let currentCity = document.querySelector("#current-city");
-  if (searchInput.value) {
-    currentCity.innerHTML = response.data.name;
-  } else {
-    alert(`Please type a city`);
-  }
   document.querySelector("#current-city").innerHTML = response.data.name;
   document.querySelector("#current-temperature").innerHTML = Math.round(response.data.main.temp);
   document.querySelector("#daily-high").innerHTML = Math.round(response.data.main.temp_max);
@@ -128,12 +121,12 @@ axios.get(apiUrl).then(currentWeather);
 let currentCity = document.querySelector("#user-location");
 currentCity.addEventListener("click", currentLocation);
 
-//Open
+//City on Open
 function searchCity(city) {
   let apiKey = "43d48c14e180f75f558e0def6bf829b0";
   let units = "imperial";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
-  axios.get(apiUrl).then(displayWeatherCondition);
+  axios.get(apiUrl).then(currentWeather);
 }
 
 searchCity("San Francisco");
